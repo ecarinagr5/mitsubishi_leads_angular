@@ -1,0 +1,64 @@
+<div class="formulario-container">
+<div [className]="loading ? 'wrap-loading show':'wrap-loading hide'">
+  <img src="../../../registrate/assets/img/ellipsis.gif" alt="MITSUBISHI">
+  <!--  <img src="../../../assets/img/ellipsis.gif" alt="MITSUBISHI">-->
+  </div>
+    <form #myForm="ngForm" (ngSubmit)='onSubmit(myForm)' novalidate="" [className]="loading ? 'formulario-cuadro hide':'formulario-cuadro show'">
+    <div class="container-form">
+      <div [className]="msgerror === 1 ? 'msg_error show':' msg_error hide'"> Favor de llenar todos los campos </div>
+      <div [className]="msgerror === 2 ? 'msg_error show':' msg_error hide'"> Favor aceptar el aviso de n </div>
+    <div class="cont-total">
+      <div class="sideinput"><input type="text" name="nombre"  placeholder="NOMBRE*"  class="inputfor" [(ngModel)]="usuario.nombre" required></div>
+      <div class="sideinput"><input type="text" name="paterno"  placeholder="APELLIDO PATERNO*"  class="inputfor" [(ngModel)]="usuario.apellidopaterno" required></div>
+      <div class="sideinput"><input type="text" name="materno"  placeholder="APELLIDO MATERNO"  class="inputfor" [(ngModel)]="usuario.apellidomaterno"></div>
+      <div class="sideinput"><input type="number" name="telefono" placeholder="TELÉFONO*" class="inputfor" [(ngModel)]="usuario.telefono" required></div>
+      <div class="sideinput generoclass">
+        <p [className]="hideInputD ? 'hide' :'placeholder-select show'"> GENERO*</p>
+        <div *ngFor="let gen of genero" class="sidetres">
+          <label for="genero{{gen.nombre}}">
+            <input id="genero{{gen.nombre}}" [value]='gen.id' type="radio" name="genero" [(ngModel)]="usuario.genero">
+            {{gen.nombre}}
+          </label>
+        </div>
+
+      </div>
+<br>
+      <div class="sideinput">
+        <p [className]="hideInputD ? 'hide' :'placeholder-select show'"> SELECCIONA TU EDAD*</p>
+        <select id="distribuidor" class="custom-select" name="edad" [(ngModel)]="usuario.edad" (change)="myFunctionD()" required>
+          <option *ngFor="let numero of edad" [value]="numero.id"> {{ numero.nombre }}</option>
+        </select>
+      </div>
+
+      <div class="sideinput"><input type="email" name="email" placeholder="CORREO ELECTRÓNICO*" class="inputfor" [(ngModel)]="usuario.email" required></div>
+      <div class="sideinputcompleto">
+        <div class="sideinput">
+          <p [className]="hideInputB ? 'hide' :'placeholder-select show'"> MODELO DE INTERÉS*</p>
+          <select id="distribuidor" class="custom-select" name="modelo" [(ngModel)]="usuario.modelo" (change)="myFunctionB()" required>
+            <option *ngFor="let auto of modelo" [value]="auto.id"> {{ auto.nombre }}</option>
+          </select>
+        </div>
+        <div class="sideinput">
+          <p [className]="hideInputB ? 'hide' :'placeholder-select show'"> TIEMPO ESTIMADO DE COMPRA*</p>
+          <select id="distribuidor" class="custom-select" name="tiempoestimado" [(ngModel)]="usuario.tiempoestimado" (change)="myFunctionC()" required>
+            <option *ngFor="let time of tiempo" [value]="time.id"> {{ time.nombre }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+      <div class="sideinput">
+        <p [className]="hideInput ? 'hide' :'placeholder-select show'"> SELECCIONA UN DISTRIBUIDOR*</p>
+        <select id="distribuidor" class="custom-select" name="distribuidor" [(ngModel)]="usuario.distribuidor" (change)="myFunction()" required>
+          <option *ngFor="let dealer of concesionaria" [value]="dealer.id"> {{ dealer.nombre }}</option>
+        </select>
+      </div>
+       <div class="avisocheck">
+         <p class="leyendamini">USO DE INFORMACIÓN</p>
+         <p class="leyendamini">Marca esta casilla para que sepamos que has leído y aceptado nuestra política de datos personales.</p>
+         <p class="leyendamini"><input type="checkbox" name="avisodeprivacidad" value="acepto" [(ngModel)]="usuario.privacidad" checked>  Aviso de Privacidad</p>
+       </div>
+      <button type="submit" class="input-form" onclick="gtag('event', 'clic', {'event_category' : 'landing100','event_label' : 'tellamamosbanner'});"> ENVIAR </button>
+    </div>
+
+  </form>
+</div>
